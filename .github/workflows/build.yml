@@ -60,7 +60,7 @@ jobs:
           zip -q -0 -r ../generated-docs.zip *
 
       - name: "Publish zipped Main Artifact"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v6
         with:
           name: generated-docs-nested-zip
           path: generated-docs.zip
