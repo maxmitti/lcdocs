@@ -12,6 +12,7 @@ on:
       - 'Makefile'
       - 'images/**'
       - '*.po'
+      - '.github/worflows/build.yml'
   pull_request:
     types: [ ready_for_review ]
 
@@ -22,31 +23,27 @@ defaults:
 jobs:
   build:
     name: Build docs
-    # 2022-04-12 libxml2 is not available for ubuntu 22 which is the ubuntu-latest option: https://packages.ubuntu.com/search?keywords=python-libxml2
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-java@v3.9.0
-        with:
-          distribution: 'temurin'
-          java-version: '11'
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+      - name: "Ubuntu 18.04: Setup chroot"
+        run: |
+          curl -L https://github.com/legacyclonk/ubuntu-1804-x86-chroot/releases/download/2022-05-19/chroot.tar.xz | sudo tar -xJ
+          curl -L https://raw.githubusercontent.com/legacyclonk/ubuntu-1804-x86-chroot/master/setup_chroot.sh | sudo bash -e -
+          sudo mkdir -p chroot/$PWD
+          sudo mount --bind . chroot/$PWD
+          echo "CHROOT=$PWD/.github/workflows/Linux-x86-chroot.sh" >> $GITHUB_ENV
 
       - name: Setup saxonb-xslt, python, gettext, Mako (Python templating engine), typescript compiler, sass (scss compiler)
         run: |
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends libsaxonb-java python-libxml2 gettext -y
-          pip3 install -r developer/requirements.txt
-          cd ./developer
-          npm ci
+          $CHROOT sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends libsaxonb-java python-libxml2 gettext nodejs npm openjdk-11-jre-headless -y
+          $CHROOT pip3 install -r developer/requirements.txt
+          (cd ./developer && $CHROOT npm ci)
 
       - name: Build docs
         run: |
-          make all -j$(nproc)
+          $CHROOT make all -j$(nproc)
 
       - name: "Collect artifacts"
         run: |
