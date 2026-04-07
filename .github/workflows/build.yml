@@ -39,8 +39,7 @@ jobs:
 
       - name: Setup saxonb-xslt, python, gettext, Mako (Python templating engine), typescript compiler, sass (scss compiler)
         run: |
-          $CHROOT sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends libsaxonb-java python-libxml2 gettext nodejs npm openjdk-11-jre-headless -y
-          $CHROOT pip3 install -r developer/requirements.txt
+          $CHROOT sudo DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends libsaxonb-java python-libxml2 gettext nodejs npm openjdk-11-jre-headless python3-mako -y
           (cd ./developer && $CHROOT npm ci)
 
       - name: Build docs
