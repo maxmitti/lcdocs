@@ -65,5 +65,5 @@ jobs:
       - name: "Publish zipped Main Artifact"
         uses: actions/upload-artifact@v6
         with:
-          name: generated-docs-nested-zip
-          path: generated-docs.zip
+          name: generated-docs
+          path: output/*
