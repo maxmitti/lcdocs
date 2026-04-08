@@ -50,6 +50,8 @@ jobs:
 
       - name: "Collect artifacts"
         run: |
+          sudo chown -R $UID online sdk-en sdk doku.pot lcdocs_summary.json
+          [ -f en.mo ] && sudo chown $UID en.mo
           mkdir output
           mv online output
           mv sdk-en output
