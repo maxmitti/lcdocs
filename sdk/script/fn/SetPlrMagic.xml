@@ -18,8 +18,8 @@
 		<desc>Fügt einen Zauber der Liste der verfügbaren Zauber eines Spielers hinzu oder entfernt einen Zauber aus der Liste.</desc>
 		<examples>
 			<example>
-<code><emLink href="Script/NamedVar.html">var</emLink> i <emLink href="script/operatoren.html">=</emLink> 0;
-<funcLink>for</funcLink> (<emLink href="Script/NamedVar.html">var</emLink> plrnum <emLink href="script/operatoren.html">=</emLink> <funcLink>GetPlayerCount</funcLink> (); plrnum; i<emLink href="script/operatoren.html">++</emLink>)
+<code><emLink href="script/NamedVar.html">var</emLink> i <emLink href="script/operatoren.html">=</emLink> 0;
+<funcLink>for</funcLink> (<emLink href="script/NamedVar.html">var</emLink> plrnum <emLink href="script/operatoren.html">=</emLink> <funcLink>GetPlayerCount</funcLink> (); plrnum; i<emLink href="script/operatoren.html">++</emLink>)
   if (<funcLink>GetPlayerName</funcLink> (i)) {
     plrnum<emLink href="script/operatoren.html">--</emLink>;
     SetPlrMagic (i, MGHL);
