@@ -26,7 +26,7 @@
 				<param isReference="false" isOptional="true"><type>object</type><name>pObj</name><desc>Objekt, dessen Physical gesetzt werden soll. 0 bei lokalen Aufrufen.</desc></param>
 			</params>
 		</syntax>
-                <desc>Ändert die physischen Eigenschaften eines Objekts. Hiermit können die in der Physical-Sektion der <emLink href="definition/DefCore.html">DefCore.txt</emLink> angegebenen Werte temporär oder permanent angepasst werden.</desc>
+                <desc>Ändert die physischen Eigenschaften eines Objekts. Hiermit können die in der Physical-Sektion der <emLink href="definition/defcore.html">DefCore.txt</emLink> angegebenen Werte temporär oder permanent angepasst werden.</desc>
 		<examples>
 			<example>
 <code>protected func Activate(pEater)
@@ -54,7 +54,7 @@ protected func FxJumpBoostStop(object trg, int num, int reason, bool tmp)
 			</example>
 		</examples>
                 <related>
-			<emLink href="definition/DefCore.html#SektionPhysical">DefCore.txt, [Physical]</emLink>
+			<emLink href="definition/defcore.html#SektionPhysical">DefCore.txt, [Physical]</emLink>
                         <funcLink>GetPhysical</funcLink>
 			<funcLink>ResetPhysical</funcLink>
 			<funcLink>TrainPhysical</funcLink>

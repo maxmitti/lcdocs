@@ -42,7 +42,7 @@ global func OnClonkSucceededSpell(id idSpell, object pClonk)
 			</example>
 		</examples>
                 <related>
-			<emLink href="definition/DefCore.html#SektionPhysical">DefCore.txt, [Physical]</emLink>
+			<emLink href="definition/defcore.html#SektionPhysical">DefCore.txt, [Physical]</emLink>
                         <funcLink>GetPhysical</funcLink>
                         <funcLink>SetPhysical</funcLink>
 			<funcLink>ResetPhysical</funcLink>
