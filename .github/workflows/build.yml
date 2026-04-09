@@ -60,10 +60,15 @@ jobs:
           [ -f en.mo ] && mv en.mo output
           mv lcdocs_summary.json output
           cd output
-          zip -q -0 -r ../generated-docs.zip *
 
-      - name: "Publish zipped Main Artifact"
+      - name: "Publish full output"
         uses: actions/upload-artifact@v6
         with:
-          name: generated-docs
+          name: generated-full
           path: output/*
+
+      - name: "Publish html help only"
+        uses: actions/upload-artifact@v6
+        with:
+          name: html-help
+          path: output/online/*
