@@ -92,18 +92,18 @@ function perform_search(searchField: HTMLInputElement, typeCheckboxes: HTMLColle
 		fetch_i18n(),
 		fetch_summary(),
 	]);
-	
+
 	const searchbar = document.getElementById('search-bar') as HTMLFieldSetElement;
 	const search_field = document.getElementById('search-field') as HTMLInputElement;
 	const type_checkboxes = document.getElementsByClassName('type-checkbox') as HTMLCollectionOf<HTMLInputElement>;
 	const entry_table = document.getElementById('search-results') as HTMLTableElement;
 	create_table(entry_table);
-	
+
 	const entries = entry_table.getElementsByTagName('tr');
 	perform_search(search_field, type_checkboxes, entries);
 	searchbar.addEventListener('change', debounce(() => perform_search(search_field, type_checkboxes, entries), 250));
 	searchbar.addEventListener('keyup', debounce(() => perform_search(search_field, type_checkboxes, entries), 250));
 	entry_table.style.display = '';
-	
+
 	document.getElementById('loading-spinner').style.display = 'none';
 })();
