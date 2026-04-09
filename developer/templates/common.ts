@@ -56,12 +56,10 @@ function entry_abs_path(rel_path: string): string {
 }
 
 function switchLanguage() {
-	let target_lang: string;
-	if (language == 'de') {
-		target_lang = 'en';
-	} else {
-		target_lang = 'de';
-	}
-	const href = window.location.href;
-	window.location.href = `/${target_lang}/${href.substring(href.lastIndexOf('/') + 1)}`;
+	var loc = window.location.href;
+	if (loc.match(/\/en\//))
+		loc = loc.replace(/\/en\//, "/de/");
+	else
+		loc = loc.replace(/\/de\//, "/en/");
+	window.location.href = loc;
 }
