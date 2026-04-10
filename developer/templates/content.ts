@@ -190,10 +190,6 @@ function render_folder(folder: Folder, folder_name: string, parent_node: HTMLULi
 	
 	folder_text_parent.appendChild(document.createTextNode(folder_name));
 	
-	for (const [subfolder_name, subfolder] of folder.folders) {
-		render_folder(subfolder, subfolder_name, folder_item_list_node, false);
-	}
-	
 	for (const item of folder.items) {
 		const item_li = document.createElement('li');
 		
@@ -226,6 +222,10 @@ function render_folder(folder: Folder, folder_name: string, parent_node: HTMLULi
 		
 		folder_item_list_node.appendChild(item_li);
 	}
+
+	for (const [subfolder_name, subfolder] of folder.folders) {
+		render_folder(subfolder, subfolder_name, folder_item_list_node, false);
+	}
 	
 	folder_node.appendChild(folder_item_list_node);
 	
@@ -256,11 +256,11 @@ function render_folder(folder: Folder, folder_name: string, parent_node: HTMLULi
 		root_folder.folders.set(dir.i18n[language], folder);
 	}
 	
-	const script_folder: Folder = {folders: new Map(), items: [], path: `${summary.generated_from}/script`};
-	create_list(script_folder, 'constants', 'by_category');
-	create_list(script_folder, 'constants', 'by_name');
+	const script_folder: Folder = root_folder.folders.get(i18n['script']) ?? {folders: new Map(), items: [], path: `${summary.generated_from}/script`};
 	create_list(script_folder, 'functions', 'by_category');
 	create_list(script_folder, 'functions', 'by_name');
+	create_list(script_folder, 'constants', 'by_category');
+	create_list(script_folder, 'constants', 'by_name');
 	root_folder.folders.set(i18n['script'], script_folder);
 	
 	for (const [folder_name, folder] of root_folder.folders) {

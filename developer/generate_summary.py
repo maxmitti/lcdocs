@@ -107,29 +107,32 @@ for path, dir_names, files in os.walk(root_dir):
 			# find <func> tags in the current document
 			for func in document.getElementsByTagName('func'):
 				create_entry(functions, rel_file_path, func)
+
+		if rel_file_path.startswith('script/fn/') or rel_file_path.startswith('script/constants/'):
+			continue
+
+		if path == root_dir:
+			dir_path = '.'
 		else:
-			if path == root_dir:
-				dir_path = '.'
-			else:
-				dir_path = path.replace(os.path.sep, '/')[len(root_dir) + 1:]
-			
-			if dir_path not in doc_files:
-				doc_files[dir_path] = {'i18n': {}, 'files': {}}
-			
-			doc_file = doc_files[dir_path]
-			
-			document = minidom.parse(file_path)
-			
-			title = get_unique_value(document, 'title', file_path)
-			
-			if file_name == 'index.xml':
-				# write i18n for directory
-				doc_file['i18n']['de'] = title
-				doc_file['i18n']['en'] = po_i18n[title]
-				
-				continue
-			
-			doc_file['files'][file_name] = {'de': title, 'en': po_i18n[title]}
+			dir_path = path.replace(os.path.sep, '/')[len(root_dir) + 1:]
+
+		if dir_path not in doc_files:
+			doc_files[dir_path] = {'i18n': {}, 'files': {}}
+
+		doc_file = doc_files[dir_path]
+
+		document = minidom.parse(file_path)
+
+		title = get_unique_value(document, 'title', file_path)
+
+		if file_name == 'index.xml':
+			# write i18n for directory
+			doc_file['i18n']['de'] = title
+			doc_file['i18n']['en'] = po_i18n[title]
+
+			continue
+
+		doc_file['files'][file_name] = {'de': title, 'en': po_i18n[title]}
 
 # sort by name first, then group by file (one constgroup-file can have multiple constants)
 constants.sort(key=lambda item: item['name'])
