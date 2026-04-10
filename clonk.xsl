@@ -72,10 +72,10 @@
 				<xsl:text>&#xa;</xsl:text>
 				<script type="text/javascript">
 					function switchLanguage() {
-					var loc = window.location.href;
-					if (loc.match(/\/en\//)) loc = loc.replace(/\/en\//, "/de/");
-					else loc = loc.replace(/\/de\//, "/en/");
-					window.location = loc;
+						var loc = window.location.href;
+						if (loc.match(/\/en\//)) loc = loc.replace(/\/en\//, "/de/");
+						else loc = loc.replace(/\/de\//, "/en/");
+						window.location.href = loc;
 					}
 				</script>
 				<xsl:text>&#xa;</xsl:text>
