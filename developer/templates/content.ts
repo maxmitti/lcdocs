@@ -18,6 +18,7 @@ interface Folder {
 	folders: FolderMap;
 	items: Item[];
 	path?: string;
+	open?: boolean;
 }
 
 function open_bullet(bullet: HTMLImageElement): void {
@@ -113,11 +114,14 @@ function create_list(parent_folder: Folder, entry_type: EntryType, sorting: List
 	
 	// create sorted array of versions and create folders in descending order
 	const versions: string[] = [];
-	for (let i = versions_sorted.length - 1; i >= 0; i--) {
+	const last = versions_sorted.length - 1;
+	for (let i = last; i >= 0; i--) {
 		const version_string = versions_sorted[i][0];
 		
 		versions.push(version_string);
-		list.folders.set(version_string, {folders: new Map(), items: []});
+
+		// open last by default
+		list.folders.set(version_string, {folders: new Map(), items: [], open: i == last});
 	}
 	
 	
@@ -167,7 +171,7 @@ function render_folder(folder: Folder, folder_name: string, parent_node: HTMLULi
 	
 	const folder_bullet = document.createElement('img');
 	folder_bullet.className = 'folder-bullet';
-	if (first) {
+	if (first || folder.open) {
 		open_bullet(folder_bullet);
 	} else {
 		close_bullet(folder_bullet);
